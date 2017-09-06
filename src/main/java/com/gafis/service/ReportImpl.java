@@ -6,16 +6,15 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by Administrator on 2017/8/29.
  */
-@RestController
-@Component
-@RequestMapping("/bom")
+//@RestController
+@Controller
 public class ReportImpl extends Report{
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -24,6 +23,7 @@ public class ReportImpl extends Report{
      * 创建对象
      * @param user
      */
+
     @RequestMapping("/saveuser")
     public void saveUser(Report user) {
         mongoTemplate.save(user);
@@ -64,5 +64,11 @@ public class ReportImpl extends Report{
         Query query=new Query(Criteria.where("id").is(id));
         mongoTemplate.remove(query,Report.class);
         return 123;
+    }
+
+
+    @RequestMapping("/index")
+    public String greeting() {
+        return "index";
     }
 }
